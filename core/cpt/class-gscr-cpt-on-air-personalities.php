@@ -50,52 +50,11 @@ class CPT_GSCR_On_Air_Personalities extends RBM_CPT {
 
 		parent::__construct();
 		
-		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
-		
 		add_filter( 'rbm_cpts_p2p_select_args', array( $this, 'p2p_select_args' ), 10, 3 );
 		
 		add_filter( 'manage_' . $this->post_type . '_posts_columns', array( $this, 'admin_column_add' ) );
 		
 		add_action( 'manage_' . $this->post_type . '_posts_custom_column', array( $this, 'admin_column_display' ), 10, 2 );
-		
-	}
-	
-	/**
-	 * Add Meta Box
-	 * 
-	 * @access		public
-	 * @since		1.0.0
-	 * @return		void
-	 */
-	public function add_meta_boxes() {
-		
-		add_meta_box(
-			'ebook-download-url',
-			sprintf( _x( '%s Meta', 'Metabox Title', 'gscr-cpt-on-air-personalities' ), $this->label_singular ),
-			array( $this, 'metabox_content' ),
-			$this->post_type,
-			'normal'
-		);
-		
-	}
-	
-	/**
-	 * Add Meta Field
-	 * 
-	 * @access		public
-	 * @since		1.0.0
-	 * @return		void
-	 */
-	public function metabox_content() {
-		
-		rbm_do_field_text(
-			'ebook_download_url',
-			_x( 'Download URL', 'Download URL Label', 'gscr-cpt-on-air-personalities' ),
-			false,
-			array(
-				'description' => __( 'The URL to download this asset, or the landing page URL.', 'gscr-cpt-on-air-personalities' ),
-			)
-		);
 		
 	}
 	
