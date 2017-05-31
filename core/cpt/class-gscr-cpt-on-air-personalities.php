@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class CPT_GSCR_On_Air_Personalities extends RBM_CPT {
 
 	public $post_type = 'on-air-personality';
-	public $p2p = 'radio-show';
+	public $p2p = 'tribe_events';
 	public $label_singular = null;
 	public $label_plural = null;
 	public $labels = array();
@@ -50,11 +50,33 @@ class CPT_GSCR_On_Air_Personalities extends RBM_CPT {
 
 		parent::__construct();
 		
+		add_filter( 'rbm_cpts_available_p2p_posts', array( $this, 'p2p_query_args' ), 10, 3 );
+		
 		add_filter( 'rbm_cpts_p2p_select_args', array( $this, 'p2p_select_args' ), 10, 3 );
 		
 		add_filter( 'manage_' . $this->post_type . '_posts_columns', array( $this, 'admin_column_add' ) );
 		
 		add_action( 'manage_' . $this->post_type . '_posts_custom_column', array( $this, 'admin_column_display' ), 10, 2 );
+		
+	}
+	
+	/**
+	 * Modify the RBM CPTs P2P Query Args for the Select Field
+	 * 
+	 * @param		array  $args         WP_Query Args
+	 * @param		string $post_type    Current Post Tpe
+	 * @param		string $relationship Connected-to Post Type
+	 *                                                
+	 * @access		public
+	 * @since		1.0.0
+	 * @return		array  WP_Query Args
+	 */
+	public function p2p_query_args( $args, $post_type, $relationship ) {
+		
+		// Recurring Events are technically Child Posts. This prevents a rediculus list of thousands of Events from showing
+		$args['post_parent'] = 0;
+		
+		return $args;
 		
 	}
 	
@@ -71,8 +93,8 @@ class CPT_GSCR_On_Air_Personalities extends RBM_CPT {
 	 */
 	public function p2p_select_args( $args, $post_type, $relationship ) {
 		
-		if ( $post_type == 'on-air-personality' && 
-			$relationship == 'radio-show' ) {
+		if ( $post_type == $this->post_type && 
+			$relationship == $this->p2p ) {
 			$args['multiple'] = true;
 		}
 		
@@ -113,7 +135,7 @@ class CPT_GSCR_On_Air_Personalities extends RBM_CPT {
 				
 			case 'radio-show' :
 				
-				$connected_posts = rbm_cpts_get_p2p_parent( $column, $post_id );
+				$connected_posts = rbm_cpts_get_p2p_parent( $this->p2p, $post_id );
 				
 				if ( ! is_array( $connected_posts ) ) $connected_posts = array( $connected_posts );
 				
