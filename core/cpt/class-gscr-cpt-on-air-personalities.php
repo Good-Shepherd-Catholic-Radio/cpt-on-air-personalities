@@ -21,7 +21,7 @@ class CPT_GSCR_On_Air_Personalities extends RBM_CPT {
 	public $post_args = array(
 		'hierarchical' => true,
 		'supports' => array( 'title', 'editor', 'author', 'thumbnail' ),
-		'has_archive' => true,
+		'has_archive' => false,
 		'rewrite' => array(
 			'slug' => 'on-air-personality',
 			'with_front' => false,
