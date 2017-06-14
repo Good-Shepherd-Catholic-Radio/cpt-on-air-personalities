@@ -58,6 +58,8 @@ class CPT_GSCR_On_Air_Personalities extends RBM_CPT {
 		
 		add_action( 'manage_' . $this->post_type . '_posts_custom_column', array( $this, 'admin_column_display' ), 10, 2 );
 		
+		add_filter( 'redirect_canonical', array( $this, 'redirect_canonical' ) );
+		
 	}
 	
 	/**
@@ -156,6 +158,25 @@ class CPT_GSCR_On_Air_Personalities extends RBM_CPT {
 				
 		}
 		
+	}
+	
+	/**
+	 * Allow Pagination to work on On-Air Personalities for their Custom Radio Shows Query by disabling Canonical Redirects
+	 * 
+	 * @param		string $redirect_url Canonical Redirect URL
+	 *                                                
+	 * @access		public
+	 * @since		1.0.0
+	 * @return		string Canonical Redirect URL. False to not Redirect
+	 */
+	public function redirect_canonical( $redirect_url ) {
+		
+		if ( is_singular( $this->post_type ) ) {
+			return false;
+		}
+		
+		return $redirect_url;
+	
 	}
 	
 }
