@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class CPT_GSCR_On_Air_Personalities extends RBM_CPT {
 
 	public $post_type = 'on-air-personality';
-	public $p2p = 'tribe_events';
+	public $p2p = 'radio-show';
 	public $label_singular = null;
 	public $label_plural = null;
 	public $labels = array();
