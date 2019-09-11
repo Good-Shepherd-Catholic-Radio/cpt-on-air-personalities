@@ -77,20 +77,7 @@ class CPT_GSCR_On_Air_Personalities extends RBM_CPT {
 		
 		// Recurring Events are technically Child Posts. This prevents a rediculus list of thousands of Events from showing
 		$args['post_parent'] = 0;
-		$args['post_type'] = 'tribe_events';
-		$args['eventDisplay'] = 'custom';
 		$args['post_status'] = 'publish';
-		$args['tax_query'] = array(
-			'tax_query' => array(
-				'relationship' => 'AND',
-				array(
-					'taxonomy' => 'tribe_events_cat',
-					'field' => 'slug',
-					'terms' => array( 'radio-show' ),
-					'operator' => 'IN'
-				),
-			),
-		);
 		
 		return $args;
 		
