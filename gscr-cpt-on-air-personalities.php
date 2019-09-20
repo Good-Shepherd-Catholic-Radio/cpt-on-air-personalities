@@ -3,7 +3,7 @@
  * Plugin Name: CPT On-Air Personalities
  * Plugin URI: https://github.com/Good-Shepherd-Catholic-Radio/cpt-on-air-personalities
  * Description: Creates the "On-Air Personalities" Custom Post Type
- * Version: 1.0.0
+ * Version: 1.0.1
  * Text Domain: gscr-cpt-on-air-personalities
  * Author: Eric Defore
  * Author URI: http://realbigmarketing.com/
