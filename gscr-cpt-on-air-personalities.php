@@ -9,7 +9,7 @@
  * Author URI: http://realbigmarketing.com/
  * Contributors: d4mation
  * GitHub Plugin URI: Good-Shepherd-Catholic-Radio/cpt-on-air-personalities
- * GitHub Branch: events-rewrite
+ * GitHub Branch: master
  */
 
 // Exit if accessed directly
